@@ -154,8 +154,6 @@ public class AbenkGDPR {
     private void updateUserStatus(boolean status) {
         settings.edit().putBoolean(user_status, status).apply();
     }
-
-    // Get AdRequest
     public static AdRequest getAdRequest(Context context) {
         if(isConsentPersonalized(context)) {
             return new AdRequest.Builder().build();

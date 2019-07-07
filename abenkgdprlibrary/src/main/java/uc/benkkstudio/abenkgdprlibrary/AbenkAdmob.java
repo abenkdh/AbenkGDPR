@@ -1,5 +1,6 @@
 package uc.benkkstudio.abenkgdprlibrary;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -8,7 +9,11 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.startapp.android.publish.ads.banner.Banner;
+import com.startapp.android.publish.adsCommon.StartAppAd;
+import com.startapp.android.publish.adsCommon.StartAppSDK;
 
+@SuppressLint("MissingPermission")
 public class AbenkAdmob {
     private Context context;
     private InterstitialAd interstitialAd;
@@ -17,6 +22,7 @@ public class AbenkAdmob {
         this.context = context;
         this.interstitialAd = interstitialAd;
     }
+
 
     public void loadInterstitialAd(String interstitialId) {
         interstitialAd = new InterstitialAd(context);
@@ -56,4 +62,21 @@ public class AbenkAdmob {
             }
         });
     }
+
+    public void initStartApp(String startAppId, Boolean disableSplash){
+        StartAppSDK.init(context, startAppId, true);
+        if(disableSplash){
+            StartAppAd.disableSplash();
+        }
+    }
+
+    public void startAppInterstitial(){
+        StartAppAd.showAd(context);
+    }
+
+    public void startAppBanner(LinearLayout linearLayout){
+        Banner startAppBanner = new Banner(context);
+        linearLayout.addView(startAppBanner);
+    }
+
 }
